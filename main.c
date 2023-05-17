@@ -1,10 +1,19 @@
-#include<stdio.h>
-int main(int argc,char*argv[])
+#include <stdio.h>
+#include "main.h"
+
+/**
+ * main - function where the process stsrt
+ * @argc: number of argument provide
+ * @argv: an array of all arguments
+ *
+ * Return: an int
+ */
+int main(int argc,char *argv[])
 {
-        printf("Command-line arguments:\n");
-                for(int i=0;i<argc;i++)
-                {
-                        printf("Arguments%d:%s\n,i,argv[i]");
-                }
-                return0;
+	/* determines if input in interactive or from file */
+	if (isatty(fd) == 1)
+		interactive_mode();
+	else
+		non_interactive_mode();	
+	return (0);
 }

@@ -1,4 +1,4 @@
-#ifndef _MAIN_H_
+#ifndef MAIN_H_
 #define MAIN_H_
 
 #include <stdio.h>
@@ -19,6 +19,8 @@
 #define CMD_NORM	
 #define CMD_OR		
  
+void interactive_mode(void);
+void non_interactive_mode(void);
 int hsh(info_t *, char **);
 int is_cmd(info_t *, char *);
 int loophsh(char **);
