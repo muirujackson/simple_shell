@@ -6,7 +6,7 @@
  *
  * Return: integer indication sucess or failure
  */
-int system_call(char **args)
+int system_call(char **args, char *name)
 {
 	pid_t pid, ended_pid;
 	int status;
@@ -17,7 +17,7 @@ int system_call(char **args)
 		/* child process */
 		if (execve(args[0], args, environ) == -1)
 		{
-			perror("execve error");
+			perror(name);
 			return (-1);
 		}
 	} else if (pid > 0)

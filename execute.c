@@ -6,7 +6,7 @@
  *
  * Return: an interger indicating suceess or failure
  */
-int execute_command(char **argv)
+int execute_command(char **argv, char *name)
 {
 	unsigned long int index;
 	char *built_ins_list[] = {
@@ -33,5 +33,5 @@ int execute_command(char **argv)
 		}
 	}
 	/*Create a process to execute */
-	return (system_call(argv));
+	return (system_call(argv, name));
 }

@@ -5,7 +5,7 @@
  *
  * Return: void
  */
-void interactive_mode(void)
+void interactive_mode(char *name)
 {
 	char *line;
 	char **args;
@@ -16,8 +16,7 @@ void interactive_mode(void)
 		write(0, "$ ", 2);
 		line = read_line();
 		args = split_strings(line);
-		execute_status = execute_command(args);
-
+		execute_status = execute_command(args, name);
 		if (execute_status >= 0)
 		{
 			exit(execute_status);
