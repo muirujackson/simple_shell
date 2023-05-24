@@ -2,6 +2,7 @@
 
 /**
  * interactive_mode - function for interactive mode
+ * @name: program name
  *
  * Return: void
  */

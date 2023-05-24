@@ -3,6 +3,7 @@
 /**
  * execute_command - call the command, check if builtin or system call
  * @argv: tokens to be executed
+ * @name: program name
  *
  * Return: an interger indicating suceess or failure
  */

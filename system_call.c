@@ -3,6 +3,7 @@
 /**
  * system_call - seach the command in system call
  * @args: the command and option
+ * @name: program name
  *
  * Return: integer indication sucess or failure
  */
@@ -20,6 +21,7 @@ int system_call(char **args, char *name)
 			perror(name);
 			return (-1);
 		}
+		exit(EXIT_FAILURE);
 	} else if (pid > 0)
 	{
 		/* parent process */

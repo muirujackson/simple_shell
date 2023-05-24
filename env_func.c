@@ -9,8 +9,8 @@
 int env_func(char **args)
 {
 	int i = 0;
-	args = environ;
 
+	args = environ;
 	while (args[i])
 	{
 		write(STDOUT_FILENO, environ[i], strlen(environ[i]));
