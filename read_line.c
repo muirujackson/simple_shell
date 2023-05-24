@@ -15,7 +15,7 @@ char *read_line(void)
 
 	if (bytes_read == -1)
 	{
-		if(feof(stdin))
+		if (feof(stdin))
 		{
 			free(buffer);
 			exit(EXIT_SUCCESS);
@@ -27,5 +27,5 @@ char *read_line(void)
 			exit(EXIT_FAILURE);
 		}
 	}
-	return buffer;
+	return (buffer);
 }

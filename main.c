@@ -7,12 +7,13 @@
  *
  * Return: an int
  */
-int main(int argc,char *argv[])
+int main(void)
 {
+	int fd = STDIN_FILENO;
 	/* determines if input in interactive or from file */
 	if (isatty(fd) == 1)
 		interactive_mode();
 	else
-		non_interactive_mode();	
+		non_interactive_mode();
 	return (0);
 }

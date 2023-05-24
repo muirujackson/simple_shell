@@ -8,40 +8,23 @@
 void interactive_mode(void)
 {
 	char *line;
-	char *args;
+	char **args;
+	int execute_status;
+
 	while (1)
 	{
-		write(0,"$ ",2);
+		write(0, "$ ", 2);
 		line = read_line();
-		printf("%s",line);
-	 }
-}
-char *read_line(void)
-{
-	char *buffer = NULL;
-	size_t buffer_size = 0;
-	ssize_t bytes_read;
+		args = split_strings(line);
+		execute_status = execute_command(args);
 
-	bytes_read = getline(&buffer, &buffer_size, stdin);
-	if (bytes_read == -1)
-	{
-		if(feof(stdin))
+		if (execute_status >= 0)
 		{
-			free(buffer);
-			exit(EXIT_SUCCESS);
+			exit(execute_status);
 		} else
-		{
-			free(buffer);
-			/* Error occurred while reading the line */
-			perror("Error reading standard input");
-			exit(EXIT_FAILURE);
-		}
+			continue;
+		/* avoid memory leaks */
+		free(line);
+		free(args);
 	}
-	return (buffer);
-}
-
-char **split_strings(char *)
-{
-
-
 }
