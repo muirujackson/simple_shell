@@ -1,6 +1,10 @@
 #include "main.h"
 
-
+/**
+ * read_input - reads user input
+ *
+ * Return: a string read from user
+ */
 char *read_input(void)
 {
 	int bufsize = 1024;

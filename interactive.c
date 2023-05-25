@@ -26,5 +26,4 @@ void interactive_mode(char *name)
 		} else
 			continue;
 	}
-	
 }
