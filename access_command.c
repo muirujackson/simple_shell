@@ -11,15 +11,15 @@ int access_command(char *full_path, char **args)
 {
 
 	pid_t pid, ended_pid;
-	int status;
+	int status, execve_status;
+
 	pid = fork();
 	if (pid == 0)
 	{
-		/* child process */
-		if (execve(full_path, args, environ) == -1)
+		execve_status = execve(full_path, args, environ)
+		if (execve_status == -1)
 		{
-		       perror("me");
-		       return (-1);
+			return (-1);
 		}
 	} else if (pid > 0)
 	{

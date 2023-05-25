@@ -21,12 +21,13 @@ int system_call(char **args, char *name)
 	while (directory != NULL)
 	{
 		char full_path[256];
+
 		strcpy(full_path, directory);
 		strcat(full_path, "/");
 		strcat(full_path, args[0]);
 		if (access(full_path, X_OK) == 0)
 		{
-			return(access_command(full_path, args));
+			return (access_command(full_path, args));
 		}
 		directory = strtok(NULL, ":");
 	}
