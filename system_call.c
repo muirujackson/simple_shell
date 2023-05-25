@@ -15,6 +15,10 @@ int system_call(char **args, char *name)
 	char *main_path = getenv("PATH");
 	char *directory;
 
+	if (access(args[0], X_OK) == 0)
+	{
+		return (access_command(args[0], args));
+	}
 	strcpy(path, main_path);
 	directory = strtok(path, ":");
 
