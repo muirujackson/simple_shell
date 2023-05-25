@@ -17,7 +17,7 @@
 extern char **environ;
 
 void interactive_mode(char *name);
-void non_interactive_mode(void);
+void non_interactive_mode(char *name);
 
 char *read_line(void);
 char **split_strings(char *command);
@@ -26,5 +26,6 @@ int exit_func(char **args);
 int execute_command(char **argv, char *name);
 int system_call(char **args, char *name);
 int access_command(char *full_path, char **args);
+char *read_input(void);
 
 #endif

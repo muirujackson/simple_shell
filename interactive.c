@@ -20,11 +20,11 @@ void interactive_mode(char *name)
 		execute_status = execute_command(args, name);
 		if (execute_status >= 0)
 		{
+			free(line);
+			free(args);
 			exit(execute_status);
 		} else
 			continue;
-		/* avoid memory leaks */
-		free(line);
-		free(args);
 	}
+	
 }
