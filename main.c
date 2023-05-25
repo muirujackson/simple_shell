@@ -9,6 +9,11 @@
  */
 int main(int argc, char *args[])
 {
-	interactive_mode(args[argc - 1]);
+	int fd = STDIN_FILENO;
+	/* determines if input in interactive or from file */
+	if (isatty(fd) == 1)
+		interactive_mode();
+	else
+		non_interactive_mode();
 	return (0);
 }
