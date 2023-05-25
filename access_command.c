@@ -16,7 +16,7 @@ int access_command(char *full_path, char **args)
 	pid = fork();
 	if (pid == 0)
 	{
-		execve_status = execve(full_path, args, environ)
+		execve_status = execve(full_path, args, environ);
 		if (execve_status == -1)
 		{
 			return (-1);
