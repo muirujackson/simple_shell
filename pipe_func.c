@@ -67,8 +67,8 @@ int pipe_func(char *args[])
             exit(EXIT_FAILURE);
         }
         close(pipefd[0]);
-        
-	executeCommand(firstCommandArgs);
+
+        executeCommand(firstCommandArgs);
     }
 
     child2 = fork();
@@ -83,9 +83,8 @@ int pipe_func(char *args[])
             exit(EXIT_FAILURE);
         }
         close(pipefd[1]);
+
         if (isPipePresent) {
-	   
-	dup2(STDOUT_FILENO, pipefd[1]);
             executeCommand(secondCommandArgs);
         } else {
             fprintf(stderr, "No second command provided\n");
@@ -104,4 +103,5 @@ int pipe_func(char *args[])
 
     return (-1);
 }
+
 
