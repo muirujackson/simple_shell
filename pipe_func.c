@@ -83,8 +83,9 @@ int pipe_func(char *args[])
             exit(EXIT_FAILURE);
         }
         close(pipefd[1]);
-	dup2(STDOUT_FILENO, STDOUT_FILENO);
         if (isPipePresent) {
+	   
+	dup2(STDOUT_FILENO, pipefd[1]);
             executeCommand(secondCommandArgs);
         } else {
             fprintf(stderr, "No second command provided\n");
