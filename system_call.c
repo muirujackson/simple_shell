@@ -9,15 +9,21 @@
  */
 int system_call(char **args, char *name)
 {
-	char path[1024];
-
-	/* Get enviment variable */
-	char *main_path = getenv("PATH");
-	char *directory;
+	char path[1024], *main_path = getenv("PATH"), *directory;
+	int index;
 
 	if (access(args[0], X_OK) == 0)
 	{
 		return (access_command(args[0], args));
+	}
+	/* check if there is a pipe in the command*/
+	while (args[index] != NULL)
+	{
+		if (strcmp(args[index],"|"))
+		{
+			return(pipe_func(args));
+		}
+		index++;
 	}
 	strcpy(path, main_path);
 	directory = strtok(path, ":");
