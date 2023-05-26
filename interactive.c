@@ -18,12 +18,14 @@ void interactive_mode(char *name)
 		line = read_input();
 		args = split_strings(line);
 		execute_status = execute_command(args, name);
+		free(line);
+		free(args);
 		if (execute_status >= 0)
 		{
-			free(line);
-			free(args);
 			exit(execute_status);
 		} else
+		{
 			continue;
+		}
 	}
 }

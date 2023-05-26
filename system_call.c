@@ -18,7 +18,7 @@ int system_call(char **args, char *name)
 	{
 		if (strcmp(args[index], "|") == 0)
 		{
-			return(pipe_func(args));
+			return (pipe_func(args));
 		}
 		index++;
 	}
