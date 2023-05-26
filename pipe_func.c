@@ -82,6 +82,7 @@ if (isPipePresent) {
             exit(EXIT_FAILURE);
         }
         close(pipefd[1]);
+	close(pipefd[0]);
 
         if (isPipePresent) {
             executeCommand(secondCommandArgs);
