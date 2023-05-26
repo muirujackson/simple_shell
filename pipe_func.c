@@ -85,6 +85,7 @@ if (isPipePresent) {
 
         if (isPipePresent) {
             executeCommand(secondCommandArgs);
+	    fflush(stdout);
         } else {
             fprintf(stderr, "No second command provided\n");
             exit(EXIT_FAILURE);
