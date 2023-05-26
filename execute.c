@@ -12,11 +12,13 @@ int execute_command(char **argv, char *name)
 	unsigned long int index;
 	char *built_ins_list[] = {
 	"exit",
-	"env"
+	"env",
+	"cd"
 	};
 	int (*built_ins_function[])(char **) = {
 	&exit_func,
-	&env_func
+	&env_func,
+	&cd_func
 	};
 
 	if (!argv)

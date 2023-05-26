@@ -20,7 +20,7 @@ extern char **environ;
 
 void interactive_mode(char *name);
 void non_interactive_mode(char *name);
-
+int cd_func(char **args);
 char *read_line(void);
 char **split_strings(char *command);
 int env_func(char **args);

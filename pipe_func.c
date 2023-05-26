@@ -6,8 +6,7 @@ void executeCommand(char **commandArgs) {
     exit(EXIT_FAILURE);
 }
 
-int pipe_func(char *args[])
-{
+int pipe_func(char *args[]) {
     int pipefd[2], i, j;
     pid_t child1, child2;
     char **firstCommandArgs = NULL;
@@ -18,7 +17,6 @@ int pipe_func(char *args[])
         perror("Pipe creation failed");
         exit(EXIT_FAILURE);
     }
-
 
     for (i = 0; args[i] != NULL; i++) {
         if (strcmp(args[i], "|") == 0) {
@@ -39,21 +37,22 @@ int pipe_func(char *args[])
     }
     firstCommandArgs[i] = NULL;
 
-if (isPipePresent) {
-    int secondCommandArgCount = 0;
-    for (; args[i + secondCommandArgCount + 1] != NULL; secondCommandArgCount++) {}
+    if (isPipePresent) {
+        int secondCommandArgCount = 0;
+        for (; args[i + secondCommandArgCount + 1] != NULL; secondCommandArgCount++) {}
 
-    secondCommandArgs = malloc((secondCommandArgCount + 1) * sizeof(char *));
-    if (secondCommandArgs == NULL) {
-        perror("Memory allocation failed");
-        exit(EXIT_FAILURE);
+        secondCommandArgs = malloc((secondCommandArgCount + 1) * sizeof(char *));
+        if (secondCommandArgs == NULL) {
+            perror("Memory allocation failed");
+            exit(EXIT_FAILURE);
+        }
+
+        for (j = 0; j < secondCommandArgCount; j++) {
+            secondCommandArgs[j] = args[i + j + 1];
+        }
+        secondCommandArgs[secondCommandArgCount] = NULL;
     }
 
-    for (j = 0; j < secondCommandArgCount; j++) {
-        secondCommandArgs[j] = args[i + j + 1];
-    }
-    secondCommandArgs[secondCommandArgCount] = NULL;
-}
     child1 = fork();
     if (child1 < 0) {
         perror("Fork failed");
@@ -77,35 +76,28 @@ if (isPipePresent) {
     }
 
     if (child2 == 0) {
-        dup2(STDOUT_FILENO, pipefd[1]);
-	    if (dup2(pipefd[0], STDIN_FILENO) == -1) {
+        if (dup2(pipefd[0], STDIN_FILENO) == -1) {
             perror("Duplication of file descriptor failed");
             exit(EXIT_FAILURE);
         }
         close(pipefd[1]);
 
-
         if (isPipePresent) {
             executeCommand(secondCommandArgs);
-	    fflush(stdout);
         } else {
             fprintf(stderr, "No second command provided\n");
             exit(EXIT_FAILURE);
         }
-    } else if ( child2 > 0)
-	{
-	
+    } else if (child2 > 0) {
+        close(pipefd[0]);
+        close(pipefd[1]);
 
-    close(pipefd[0]);
-    close(pipefd[1]);
+        waitpid(child1, NULL, 0);
+        waitpid(child2, NULL, 0);
 
-    waitpid(child1, NULL, 0);
-    waitpid(child2, NULL, 0);
-
-    free(firstCommandArgs);
-    free(secondCommandArgs);
-	}
-    return (-1);
+        free(firstCommandArgs);
+        free(secondCommandArgs);
+    }
+    return -1;
 }
-
 
