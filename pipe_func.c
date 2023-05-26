@@ -67,6 +67,7 @@ int pipe_func(char *args[])
             exit(EXIT_FAILURE);
         }
         close(pipefd[0]);
+	close(pipefd[1]);
 
         executeCommand(firstCommandArgs);
     }
@@ -83,6 +84,7 @@ int pipe_func(char *args[])
             exit(EXIT_FAILURE);
         }
         close(pipefd[1]);
+	close(pipefd[0]);
 
         if (isPipePresent) {
             executeCommand(secondCommandArgs);
