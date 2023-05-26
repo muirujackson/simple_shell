@@ -101,7 +101,7 @@ int pipe_func(char *args[])
     free(firstCommandArgs);
     free(secondCommandArgs);
 
-    return 0;
+    return (-1);
 }
 
 
