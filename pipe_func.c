@@ -77,12 +77,13 @@ if (isPipePresent) {
     }
 
     if (child2 == 0) {
-        if (dup2(pipefd[0], STDIN_FILENO) == -1) {
+        dup2(STDOUT_FILENO, pipefd[1]);
+	    if (dup2(pipefd[0], STDIN_FILENO) == -1) {
             perror("Duplication of file descriptor failed");
             exit(EXIT_FAILURE);
         }
         close(pipefd[1]);
-	close(pipefd[0]);
+
 
         if (isPipePresent) {
             executeCommand(secondCommandArgs);
@@ -91,7 +92,9 @@ if (isPipePresent) {
             fprintf(stderr, "No second command provided\n");
             exit(EXIT_FAILURE);
         }
-    }
+    } else if ( child2 > 0)
+	{
+	
 
     close(pipefd[0]);
     close(pipefd[1]);
@@ -101,7 +104,7 @@ if (isPipePresent) {
 
     free(firstCommandArgs);
     free(secondCommandArgs);
-
+	}
     return (-1);
 }
 
