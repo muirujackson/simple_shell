@@ -12,19 +12,23 @@ int system_call(char **args, char *name)
 	char path[1024], *main_path = getenv("PATH"), *directory;
 	int index;
 
-	if (access(args[0], X_OK) == 0)
-	{
-		return (access_command(args[0], args));
-	}
+	index = 0;
 	/* check if there is a pipe in the command*/
 	while (args[index] != NULL)
 	{
-		if (strcmp(args[index],"|"))
+		if (strcmp(args[index], "|") == 0)
 		{
 			return(pipe_func(args));
 		}
 		index++;
 	}
+
+	if (access(args[0], X_OK) == 0)
+	{
+		return (access_command(args[0], args));
+	}
+
+
 	strcpy(path, main_path);
 	directory = strtok(path, ":");
 

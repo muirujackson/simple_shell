@@ -39,22 +39,21 @@ int pipe_func(char *args[])
     }
     firstCommandArgs[i] = NULL;
 
-    if (isPipePresent) {
-        int secondCommandArgCount = 0;
-        for (; args[i + secondCommandArgCount + 1] != NULL; secondCommandArgCount++) {}
+if (isPipePresent) {
+    int secondCommandArgCount = 0;
+    for (; args[i + secondCommandArgCount + 1] != NULL; secondCommandArgCount++) {}
 
-        secondCommandArgs = malloc((secondCommandArgCount + 1) * sizeof(char *));
-        if (secondCommandArgs == NULL) {
-            perror("Memory allocation failed");
-            exit(EXIT_FAILURE);
-        }
-
-        for (j = 0; j < secondCommandArgCount; j++) {
-            secondCommandArgs[j] = args[i + j + 1];
-        }
-        secondCommandArgs[secondCommandArgCount] = NULL;
+    secondCommandArgs = malloc((secondCommandArgCount + 1) * sizeof(char *));
+    if (secondCommandArgs == NULL) {
+        perror("Memory allocation failed");
+        exit(EXIT_FAILURE);
     }
 
+    for (j = 0; j < secondCommandArgCount; j++) {
+        secondCommandArgs[j] = args[i + j + 1];
+    }
+    secondCommandArgs[secondCommandArgCount] = NULL;
+}
     child1 = fork();
     if (child1 < 0) {
         perror("Fork failed");
