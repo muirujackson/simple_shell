@@ -85,9 +85,12 @@ int pipe_func(char *args[])
         }
         close(pipefd[1]);
 	close(pipefd[0]);
-
         if (isPipePresent) {
-            executeCommand(secondCommandArgs);
+            if (dup2(STDOUT_FILENO, STDOUT_FILENO) == -1) {
+                perror("Duplication of file descriptor failed");
+                exit(EXIT_FAILURE);
+            }            
+		executeCommand(secondCommandArgs);
         } else {
             fprintf(stderr, "No second command provided\n");
             exit(EXIT_FAILURE);
