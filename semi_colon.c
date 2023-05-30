@@ -28,7 +28,7 @@ int semiColon_func(char *args[])
 
 	for (i = 0; args[i] != NULL; i++)
 	{
-		if (strcmp(args[i], ";") == 0)
+		if ((strcmp(args[i], ";") == 0) || (strcmp(args[i], "&&") == 0))
 		{
 			args[i] = NULL;
 			break;

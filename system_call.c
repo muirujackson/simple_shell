@@ -20,7 +20,7 @@ int system_call(char **args, char *name)
 		{
 			return (pipe_func(args));
 		}
-               if (strcmp(args[index], ";") == 0)
+               if ((strcmp(args[index], ";") == 0) || (strcmp(args[index], "&&") == 0))
                 {
                         return (semiColon_func(args));
                 }
