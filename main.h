@@ -30,5 +30,6 @@ int system_call(char **args, char *name);
 int access_command(char *full_path, char **args);
 char *read_input(void);
 int pipe_func(char *args[]);
+int semiColon_func(char *args[]);
 
 #endif

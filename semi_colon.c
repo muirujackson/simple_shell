@@ -6,7 +6,7 @@
  *
  * Return: void
  */
-void executeCommand(char **commandArgs)
+void execCommand(char **commandArgs)
 {
 	execvp(commandArgs[0], commandArgs);
 	perror("Execution of command failed");
@@ -19,7 +19,7 @@ void executeCommand(char **commandArgs)
  *
  * Return: int
  */
-int pipe_func(char *args[])
+int semiColon_func(char *args[])
 {
 	int i, j, secondCommandArgCount;
 	pid_t child1, child2;
@@ -71,7 +71,7 @@ int pipe_func(char *args[])
 	}
 	if (child1 == 0)
 	{
-		executeCommand(firstCommandArgs);
+		execCommand(firstCommandArgs);
 	}
 	child2 = fork();
 	if (child2 < 0)
@@ -81,7 +81,7 @@ int pipe_func(char *args[])
 	}
 	if (child2 == 0)
 	{
-		executeCommand(secondCommandArgs);
+		execCommand(secondCommandArgs);
 		fprintf(stderr, "No second command provided\n");
 		exit(EXIT_FAILURE);
 	} else if (child2 > 0)
